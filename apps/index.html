@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projects | Mahad Imran</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #071017;
+      --bg-deep: #03080c;
+      --panel: rgba(8, 18, 27, 0.78);
+      --line: rgba(142, 217, 255, 0.14);
+      --text: #eff7fb;
+      --muted: #a2b7c5;
+      --soft: #6e8696;
+      --accent: #58d4ff;
+      --accent-strong: #b1f0ff;
+      --shadow: rgba(0, 0, 0, 0.34);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 14% 18%, rgba(88, 212, 255, 0.1), transparent 24%),
+        linear-gradient(180deg, rgba(4, 9, 13, 0.9), rgba(4, 9, 13, 0.96)),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+    }
+
+    .shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 26px 0 48px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 26px;
+    }
+
+    .back,
+    .button,
+    .button-secondary {
+      min-height: 48px;
+      padding: 0 22px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 180ms ease, border-color 180ms ease;
+    }
+
+    .back,
+    .button-secondary {
+      color: var(--text);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .button {
+      color: #041018;
+      background: linear-gradient(135deg, var(--accent), #9be7ff);
+    }
+
+    .back:hover,
+    .button:hover,
+    .button-secondary:hover {
+      transform: translateY(-1px);
+      border-color: rgba(142, 217, 255, 0.3);
+    }
+
+    .hero,
+    .project-card,
+    .next-card {
+      border-radius: 30px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(10, 20, 28, 0.78), rgba(8, 14, 21, 0.92));
+      box-shadow: 0 28px 72px var(--shadow);
+    }
+
+    .hero {
+      padding: 34px;
+      margin-bottom: 20px;
+    }
+
+    .eyebrow {
+      color: var(--accent-strong);
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2 {
+      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 14px 0 12px;
+      font-size: clamp(44px, 8vw, 82px);
+      line-height: 0.94;
+      letter-spacing: -0.05em;
+      max-width: 10ch;
+    }
+
+    .lead,
+    .project-copy p,
+    .next-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .project-card {
+      overflow: hidden;
+    }
+
+    .project-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(340px, 0.9fr);
+    }
+
+    .project-copy {
+      padding: 34px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .project-title {
+      margin: 14px 0 12px;
+      font-size: clamp(38px, 6vw, 62px);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+    }
+
+    .stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .tag {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .points {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .points li {
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(142, 217, 255, 0.1);
+      background: rgba(255, 255, 255, 0.022);
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .points strong {
+      color: var(--text);
+    }
+
+    .project-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .project-actions .button,
+    .project-actions .button-secondary {
+      min-width: 168px;
+    }
+
+    .project-shot {
+      padding: 22px;
+      background:
+        radial-gradient(circle at 78% 18%, rgba(88, 212, 255, 0.14), transparent 22%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .shot-shell {
+      width: 100%;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: rgba(8, 14, 21, 0.96);
+    }
+
+    .shot-top {
+      min-height: 42px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--soft);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(142, 217, 255, 0.1);
+    }
+
+    .shot-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .shot-dots span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.24);
+    }
+
+    .shot-shell img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .next-card {
+      margin-top: 18px;
+      padding: 28px;
+    }
+
+    @media (max-width: 920px) {
+      .project-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .shell {
+        width: min(100% - 22px, 1180px);
+        padding-top: 16px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero,
+      .project-copy,
+      .project-shot,
+      .next-card {
+        padding: 20px;
+      }
+
+      .project-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .button,
+      .button-secondary,
+      .back {
+        width: 100%;
+      }
+
+      .project-actions .button,
+      .project-actions .button-secondary {
+        min-width: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="topbar">
+      <a class="back" href="/">Back to home</a>
+    </div>
+
+    <section class="hero">
+      <div class="eyebrow">Published Work</div>
+      <h1>Projects I’m shipping.</h1>
+      <p class="lead">A small collection for now, built around real utility rather than filler. Each project is part of how I am getting sharper at design, engineering, and shipping.</p>
+    </section>
+
+    <article class="project-card">
+      <div class="project-layout">
+        <div class="project-copy">
+          <div>
+            <div class="eyebrow">Featured App</div>
+            <h2 class="project-title">FastTracker</h2>
+            <p>A Rails and Hotwire app for tracking missed Ramadan fasts, seasonal backlog, and completed make-up fasts through a workflow that stays simple even when the underlying tracking gets more complex.</p>
+
+            <div class="stack">
+              <div class="tag">Rails 8.1</div>
+              <div class="tag">Hotwire</div>
+              <div class="tag">Stimulus</div>
+              <div class="tag">VPS deployed</div>
+            </div>
+
+            <div class="project-actions">
+              <a class="button" href="https://fasttracker.mahadimran.me">Open FastTracker</a>
+              <a class="button-secondary" href="mailto:mahad.imran555@gmail.com">Ask about the build</a>
+            </div>
+          </div>
+
+          <ul class="points">
+            <li><strong>Tracking model:</strong> supports exact missed fasts, season-based backlog, and completed make-up fasts.</li>
+            <li><strong>Engineering focus:</strong> user authentication, allocation logic, readable data flow, and practical form behavior.</li>
+            <li><strong>Product focus:</strong> a live app built around a real use case instead of a demo-only concept.</li>
+          </ul>
+        </div>
+
+        <div class="project-shot">
+          <div class="shot-shell">
+            <div class="shot-top">
+              <div class="shot-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <div>Live Capture</div>
+            </div>
+            <img src="/fasttracker-dashboard.png" alt="FastTracker dashboard screenshot">
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <section class="next-card">
+      <div class="eyebrow">In Progress</div>
+      <h2>More projects are coming.</h2>
+      <p>I’m continuing to build out this portfolio with new apps and sharper case-study presentation as those projects become worth publishing.</p>
+    </section>
+  </main>
+</body>
+</html>
